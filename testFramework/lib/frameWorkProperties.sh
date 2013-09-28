@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FIRST_NAME="manuel"
+LAST_NAME="briot"
+
+#DIRECTORY WHERE FILES WILL BE GENERATED
+HOME_DIRECTORY="/c/temp"
+
+HOST=localhost
+PORT=3000
+
+URL="http://$HOST:$PORT"
