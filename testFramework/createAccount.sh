@@ -4,29 +4,24 @@
 . ./lib/frameWorkProperties.sh
 . ./lib/cw_functions.sh
 
-UNIQUE_ID=`date '+%Y%m%d%H%M%S'`
 file="detailResult.txt"
-
 INCREMENT=$1
-createDirTest
 
-printTestedPlateforme
+createDirTest
+printTestedPlateform
 printLogFileLocation
 
-EMAIL=${FIRST_NAME}"."${LAST_NAME}+${INCREMENT}@gmail.com
-FIRSTNAME=${FIRST_NAME}_${INCREMENT}
-LASTNAME=${LAST_NAME}_${INCREMENT}
+EMAIL=${FIRST_NAME}"."${LAST_NAME}@gmail.com
+FIRSTNAME=${FIRST_NAME}
+LASTNAME=${LAST_NAME}
 
-# TEST DE CREATE ACCOUNT
+#createAccount test
 CONTENT_CREATEACCOUNT="{\"lastname\": \"${LASTNAME}\",\"firstname\": \"${FIRSTNAME}\",\"email\": \"${EMAIL}\"}" 
-curlPut $URL /createAccount "$CONTENT_CREATEACCOUNT"
+curlFunction $URL createAccount "$CONTENT_CREATEACCOUNT"
 
-#RECUPERATION DU USERID DANS LOG
+#retrieve userid from log
 USERID=`cat ${HOME_DIRECTORY}/$INCREMENT/$file | tr "," "\n" | grep "userid" |  head -n2 | tail -1| cut -d'"' -f4`
 echo " USERID = : $USERID"
 
-# TEST DE GET ACCOUNT INFO
-CONTENT_GETACCOUNT='{"userid":"'$USERID'"}'
-curlPutCWWithTarget $URL getAccountInfo "$CONTENT_GETACCOUNT" $USERID
-
-printLogFileLocation
+#getAccountInfo test
+curlFunction $URL getAccountInfo/$USERID
