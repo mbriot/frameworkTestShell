@@ -3,8 +3,8 @@
 FIRST_NAME="manuel"
 LAST_NAME="briot"
 
-#DIRECTORY WHERE FILES WILL BE GENERATED
-HOME_DIRECTORY="/c/Temp"
+#Result files directory
+HOME_DIRECTORY="/Users/manu/Desktop"
 
 HOST=localhost
 PORT=3000

@@ -5,16 +5,17 @@
 
 #FONCTION REQUETE CURL + LOG
 curlFunction(){
-	URL=$1
-	SERVICE=$2
-	DATA=$3
+	METHOD=$1
+	URL=$2
+	SERVICE=$3
+	DATA=$4
 	
 	echo -e " " |tee -a ${HOME_DIRECTORY}/$INCREMENT/$file
-	echo -e "Test de $2 \n " |tee -a ${HOME_DIRECTORY}/$INCREMENT/$file
-	echo -e "curl -H \"Content-type: application/json\"  -X \"POST\"  -d '"$DATA"' ${1}/${2}" | tee -a ${HOME_DIRECTORY}/$INCREMENT/$file
-	echo -e "INPUT : \n $3" |tee -a ${HOME_DIRECTORY}/$INCREMENT/$file
+	echo -e "Test de ${SERVICE} \n " |tee -a ${HOME_DIRECTORY}/$INCREMENT/$file
+	echo -e "curl -H \"Content-type: application/json\"  -X $METHOD                                                                                                                                         -d '"$DATA"' ${URL}/${SERVICE}" | tee -a ${HOME_DIRECTORY}/$INCREMENT/$file
+	echo -e "INPUT : \n ${DATA}" |tee -a ${HOME_DIRECTORY}/$INCREMENT/$file
 	echo -e "OUTPUT : " |tee -a ${HOME_DIRECTORY}/$INCREMENT/$file
-	curl -w "\n HTTP CODE : %{http_code}" -s -D ${HOME_DIRECTORY}/$INCREMENT/header/${SERVICE}.headersOut -H "Content-type: application/json" -X "POST"  -d "$DATA" ${1}/${2} | tee -a ${HOME_DIRECTORY}/$INCREMENT/$file
+	curl -w "\n HTTP CODE : %{http_code}" -s -D ${HOME_DIRECTORY}/$INCREMENT/header/${SERVICE}.headersOut -H "Content-type: application/json" -X $METHOD  -d "$DATA" ${URL}/${SERVICE} | tee -a ${HOME_DIRECTORY}/$INCREMENT/$file
 	echo -e " " |tee -a ${HOME_DIRECTORY}/$INCREMENT/$file
 }
 
@@ -28,7 +29,6 @@ printTestedPlateform(){
 
 createDirTest(){
 	cd ${HOME_DIRECTORY}
-	mkdir $INCREMENT
-	cd $INCREMENT
+	mkdir $INCREMENT && cd $INCREMENT
 	mkdir header
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#get framework properties and framework functions
+#get properties and functions framework
 . ./lib/frameWorkProperties.sh
 . ./lib/cw_functions.sh
 
@@ -17,11 +17,11 @@ LASTNAME=${LAST_NAME}
 
 #createAccount test
 CONTENT_CREATEACCOUNT="{\"lastname\": \"${LASTNAME}\",\"firstname\": \"${FIRSTNAME}\",\"email\": \"${EMAIL}\"}" 
-curlFunction $URL createAccount "$CONTENT_CREATEACCOUNT"
+curlFunction POST $URL createAccount "$CONTENT_CREATEACCOUNT"
 
 #retrieve userid from log
 USERID=`cat ${HOME_DIRECTORY}/$INCREMENT/$file | tr "," "\n" | grep "userid" |  head -n2 | tail -1| cut -d'"' -f4`
 echo " USERID = : $USERID"
 
 #getAccountInfo test
-curlFunction $URL getAccountInfo/$USERID
+curlFunction GET $URL getAccountInfo/$USERID
