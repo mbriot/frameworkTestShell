@@ -1,6 +1,4 @@
 frameworkTestShell
 ==================
 
-A simple test framework in shell
-
-test
+A simple REST API test framework in shell
